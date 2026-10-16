@@ -1,0 +1,949 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>AI, Decoded (Copy)</title>
+<meta name="description" content="An information literacy workshop from Kenmore Library: what AI actually is, what it isn't, and how to use it without getting fooled.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: navy workshop bands open each of the four parts (like the deck's section slides); white reading columns in between; blush panels only where the deck used them. Single committed light look, taken from the deck. */
+:root{
+  --navy:#2F3C7E;
+  --navy-deep:#23305E;
+  --ink:#23263A;
+  --slate:#5C6178;
+  --coral:#F96167;
+  --coral-ink:#B84B4B;
+  --blush:#FBEEEC;
+  --blush-line:#EBD6D2;
+  --peri:#9498C7;
+  --mist:#C7CCE8;
+  --paper:#FFFFFF;
+  --good:#3F8A4C;
+  --good-bg:#E9F3EA;
+
+  --serif:"Source Serif 4", Cambria, Georgia, "Times New Roman", serif;
+  --sans:"Public Sans", Calibri, "Segoe UI", system-ui, sans-serif;
+
+  --step-5:clamp(2.9rem, 1.6rem + 5.6vw, 5.6rem);
+  --step-4:clamp(2.1rem, 1.5rem + 2.6vw, 3.25rem);
+  --step-3:clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+  --step-2:1.375rem;
+  --step-1:1.125rem;
+  --step-0:1.0625rem;
+  --step--1:.9rem;
+
+  --wrap:1120px;
+  --gutter:clamp(16px, 4vw, 40px);
+  --nav-h:64px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--step-0);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.15;text-wrap:balance;margin:0;color:var(--ink)}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter)}
+.prose{max-width:62ch}
+.muted{color:var(--slate)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;z-index:100;border-radius:6px}
+.skip:focus{left:12px}
+
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:1px solid var(--blush-line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;min-height:var(--nav-h)}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.2rem;text-decoration:none;color:var(--navy);white-space:nowrap;flex:none}
+.nav ul{list-style:none;margin:0 0 0 auto;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.link{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;text-decoration:none;font-size:.94rem;font-weight:500;color:var(--slate);white-space:nowrap}
+.nav a.link:hover{color:var(--navy);background:var(--blush)}
+.nav a.link[aria-current="true"]{color:var(--paper);background:var(--navy)}
+.nav .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:.75rem;font-weight:700;border:1.5px solid currentColor;font-variant-numeric:tabular-nums}
+.nav a.link[aria-current="true"] .n{border-color:var(--coral);background:var(--coral);color:var(--paper)}
+@media (max-width:880px){
+  .nav .wrap{flex-wrap:wrap;gap:0;padding-block:8px 6px}
+  .nav ul{margin:0;width:100%;padding-bottom:2px}
+  .nav a.link{padding:6px 10px;font-size:.88rem}
+  html{scroll-padding-top:120px}
+}
+
+/* ---------- Hero ---------- */
+.hero{background:var(--navy);color:var(--paper);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:260px;height:260px;border:2px solid var(--coral);border-radius:50%;left:-120px;top:-130px;opacity:.9}
+.hero > .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(56px,9vw,112px) clamp(48px,7vw,88px);position:relative}
+.hero .kicker{font-size:.95rem;color:var(--mist);margin-bottom:18px}
+.hero h1{color:var(--paper);font-size:var(--step-5);font-weight:700;letter-spacing:-.02em;line-height:1}
+.hero .tag{font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,1rem + 1vw,1.6rem);line-height:1.4;color:var(--paper);margin-top:22px;max-width:30ch}
+.hero .by{margin-top:36px;display:flex;flex-direction:column;gap:2px;font-size:.98rem;color:var(--mist)}
+.hero .by strong{color:var(--paper);font-weight:600}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 .98rem/1 var(--sans);padding:14px 20px;border-radius:8px;text-decoration:none;cursor:pointer;border:1.5px solid transparent}
+.btn-coral{background:var(--coral);color:var(--ink)}
+.btn-coral:hover{background:#ff7a7f}
+.btn-ghost{border-color:rgba(255,255,255,.45);color:var(--paper);background:transparent}
+.btn-ghost:hover{border-color:var(--paper)}
+.frame{position:relative;justify-self:center;width:min(100%,400px)}
+.frame::before{content:"";position:absolute;inset:18px -14px -18px 14px;background:var(--coral);border-radius:6px;transform:rotate(3deg)}
+.frame img{position:relative;display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;box-shadow:0 20px 40px rgba(20,24,60,.35)}
+
+/* Roadmap strip inside hero */
+.roadmap{background:var(--navy-deep);position:relative}
+.roadmap ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.roadmap li{border-left:1px solid rgba(199,204,232,.2)}
+.roadmap li:last-child{border-right:1px solid rgba(199,204,232,.2)}
+.roadmap a{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:24px 20px 26px;text-decoration:none;color:var(--paper);height:100%}
+.roadmap a:hover{background:rgba(255,255,255,.05)}
+.roadmap a:hover .rt{text-decoration:underline;text-decoration-color:var(--coral);text-underline-offset:4px}
+.roadmap .ic{grid-row:span 3;width:40px;height:40px;border-radius:50%;background:var(--coral);display:grid;place-items:center}
+.roadmap .ic img{width:22px;height:22px}
+.roadmap .rn{font-size:.82rem;color:var(--peri);font-variant-numeric:tabular-nums}
+.roadmap .rt{font-family:var(--serif);font-weight:600;font-size:1.12rem;line-height:1.25}
+.roadmap .rd{font-size:.9rem;color:var(--mist);line-height:1.45;margin-top:4px}
+@media (max-width:900px){
+  .hero > .wrap{grid-template-columns:1fr}
+  .hero::before{width:160px;height:160px;left:-110px;top:-100px}
+  .frame{width:min(78%,320px);margin-top:12px}
+  .roadmap ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .roadmap li:nth-child(n+3){border-top:1px solid rgba(199,204,232,.2)}
+  .roadmap li:nth-child(2){border-right:1px solid rgba(199,204,232,.2)}
+}
+@media (max-width:520px){
+  .roadmap ol{grid-template-columns:1fr}
+  .roadmap li{border-right:1px solid rgba(199,204,232,.2);border-top:1px solid rgba(199,204,232,.2)}
+}
+
+/* ---------- Generic sections ---------- */
+.block{padding-block:clamp(56px,8vw,96px)}
+.block + .block{padding-top:0}
+.h2{font-size:var(--step-4);letter-spacing:-.01em}
+.h3{font-size:var(--step-3)}
+.lede{font-size:var(--step-1);color:var(--slate);margin-top:14px;max-width:60ch}
+.stack{display:flex;flex-direction:column;gap:18px}
+
+/* Part openers (the deck's navy section slides) */
+.part{background:var(--navy);color:var(--paper);position:relative;overflow:hidden}
+.part::after{content:"";position:absolute;right:-60px;top:50%;width:220px;height:220px;border:2px solid var(--coral);border-radius:50%;transform:translateY(-50%);opacity:.8}
+.part .wrap{display:grid;grid-template-columns:auto 1fr;gap:10px clamp(20px,4vw,48px);align-items:end;padding-block:clamp(48px,7vw,80px);position:relative;z-index:1}
+.part .num{font-family:var(--serif);font-weight:700;font-size:clamp(4rem,3rem + 5vw,7.5rem);line-height:.8;color:var(--peri);font-variant-numeric:lining-nums}
+.part h2{color:var(--paper);font-size:var(--step-4)}
+.part p{color:var(--mist);font-size:var(--step-1);margin-top:12px;max-width:52ch}
+@media (max-width:600px){.part .wrap{grid-template-columns:1fr}.part::after{width:140px;height:140px;right:-50px;top:40px;transform:none}}
+
+/* Two-column feature */
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+
+.quote-card{background:var(--navy);color:var(--paper);border-radius:10px;padding:clamp(28px,4vw,40px)}
+.quote-card .q{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,1.2rem + 1.4vw,2.25rem);line-height:1.2;color:var(--paper)}
+.quote-card .qsmall{margin-top:22px;padding-top:18px;border-top:1px solid rgba(199,204,232,.3);color:var(--mist);font-size:.98rem}
+.illo{display:flex;gap:18px;align-items:center;margin-top:28px}
+.illo img{width:96px;height:96px;flex:none}
+.illo p{font-family:var(--serif);font-style:italic;color:var(--slate);font-size:1.05rem;line-height:1.5}
+
+/* Paired list: 2x2 of title + text, separated by rules not cards */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,4vw,56px);margin-top:32px}
+.grid2 > div{padding-block:22px;border-top:1px solid var(--blush-line);min-width:0}
+.grid2 h3,.grid3 h3,.grid4 h3{font-size:var(--step-2);margin-bottom:8px}
+.grid2 p,.grid3 p,.grid4 p{color:var(--slate)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px);margin-top:32px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,32px);margin-top:32px}
+.grid3 > div,.grid4 > div{min-width:0}
+@media (max-width:900px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.grid3{grid-template-columns:1fr}}
+@media (max-width:600px){.grid2,.grid4{grid-template-columns:1fr}}
+
+/* Myths */
+.myths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:32px}
+.myth{background:var(--blush);border-radius:10px;padding:24px 26px;min-width:0}
+.myth .said{font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--navy);line-height:1.3;text-decoration:line-through;text-decoration-color:var(--coral);text-decoration-thickness:2px}
+.myth p{margin-top:10px;color:var(--ink)}
+@media (max-width:640px){.myths{grid-template-columns:1fr}}
+
+/* Tool names table */
+.tools{margin-top:28px;border-top:2px solid var(--navy)}
+.tools .row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,.7fr) minmax(0,1.6fr);gap:16px;padding-block:16px;border-bottom:1px solid var(--blush-line)}
+.tools .row.head{font-size:.85rem;color:var(--slate);font-weight:600;padding-block:10px}
+.tools .name{font-family:var(--serif);font-weight:600;font-size:1.15rem}
+.tools .row > *{min-width:0}
+@media (max-width:640px){.tools .row{grid-template-columns:1fr;gap:2px}.tools .row.head{display:none}.tools .by{font-size:.9rem;color:var(--slate)}}
+
+/* Steps */
+.steps{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,32px);counter-reset:s}
+.steps li{counter-increment:s;min-width:0;position:relative;padding-top:56px}
+.steps li::before{content:counter(s);position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--paper);display:grid;place-items:center;font:700 1rem var(--sans)}
+.steps li:not(:last-child)::after{content:"";position:absolute;top:20px;left:52px;right:-12px;height:2px;background:var(--mist)}
+.steps h3{font-size:var(--step-2);margin-bottom:8px}
+.steps p{color:var(--slate)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.steps li:nth-child(2)::after{display:none}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}.steps li::after{display:none}}
+
+.note{display:flex;gap:14px;align-items:flex-start;margin-top:32px;padding:18px 22px;border-left:4px solid var(--coral);background:var(--blush);border-radius:0 8px 8px 0}
+.note p{color:var(--ink)}
+
+/* Trust scale */
+.trust{margin-top:36px}
+.scale-bar{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--navy),var(--peri) 50%,var(--coral))}
+.scale-ends{display:flex;justify-content:space-between;margin-top:10px;font-weight:700;font-size:.95rem}
+.scale-ends span:first-child{color:var(--navy)}
+.scale-ends span:last-child{color:var(--coral-ink)}
+.trust-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,56px);margin-top:22px}
+.trust-cols > div{min-width:0}
+.trust-cols > div:last-child{text-align:right}
+.trust-cols p.d{color:var(--slate)}
+.trust-cols ul{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:10px}
+.trust-cols li{font-family:var(--serif);font-style:italic;font-size:1.1rem;padding:12px 16px;border-radius:8px}
+.trust-cols > div:first-child li{background:#EEF0FA;color:var(--navy)}
+.trust-cols > div:last-child li{background:var(--blush);color:var(--coral-ink)}
+@media (max-width:640px){.trust-cols{grid-template-columns:1fr}.trust-cols > div:last-child{text-align:left}}
+
+/* Interactive: AI or not */
+.passages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+.passage{border:1.5px solid var(--mist);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0;transition:border-color .2s, background-color .2s}
+.passage .pl{font-weight:700;color:var(--navy);font-size:.95rem}
+.passage blockquote{margin:0;font-family:var(--serif);font-size:1.05rem;line-height:1.65;color:var(--ink);flex:1}
+.passage .pick{align-self:flex-start}
+.btn-outline{border-color:var(--navy);color:var(--navy);background:var(--paper)}
+.btn-outline:hover{background:var(--navy);color:var(--paper)}
+.passage.is-ai{border-color:var(--coral);background:var(--blush)}
+.stamp{display:none;align-self:flex-start;font-weight:700;font-size:.9rem;padding:6px 12px;border-radius:999px;background:var(--coral);color:var(--ink)}
+.passage.is-ai .stamp{display:inline-block}
+.passage.is-human .stamp{display:inline-block;background:var(--mist);color:var(--navy)}
+.revealed .pick{display:none}
+.result{margin-top:18px;font-size:1.05rem;min-height:1.6em}
+.result strong{font-family:var(--serif)}
+@media (max-width:760px){.passages{grid-template-columns:1fr}}
+
+/* Confidence pair */
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+.claim{border-radius:10px;padding:28px;background:var(--blush);min-width:0;transition:background-color .25s}
+.claim .c{font-family:var(--serif);font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem);line-height:1.3;color:var(--ink)}
+.claim .v{margin-top:12px;color:var(--slate);visibility:hidden}
+.pair.shown .claim .v{visibility:visible}
+.pair.shown .claim.right{background:var(--good-bg)}
+.pair.shown .claim.right .v{color:var(--good);font-weight:600}
+.pair.shown .claim.wrong .v{color:var(--coral-ink);font-weight:600}
+@media (max-width:600px){.pair{grid-template-columns:1fr}}
+
+/* Myth or fact quiz */
+.quiz{list-style:none;margin:28px 0 0;padding:0;border-top:2px solid var(--navy)}
+.quiz li{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:8px 18px;align-items:center;padding-block:18px;border-bottom:1px solid var(--blush-line)}
+.quiz .qn{font-family:var(--serif);font-weight:700;font-size:1.3rem;color:var(--peri);font-variant-numeric:tabular-nums}
+.quiz .qs{font-family:var(--serif);font-size:1.2rem;line-height:1.35}
+.quiz .choices{display:flex;gap:8px}
+.quiz .choices button{font:600 .9rem/1 var(--sans);padding:10px 14px;border-radius:999px;border:1.5px solid var(--navy);background:var(--paper);color:var(--navy);cursor:pointer}
+.quiz .choices button:hover{background:var(--navy);color:var(--paper)}
+.quiz .ans{grid-column:2 / -1;color:var(--slate)}
+.quiz .ans b{color:var(--ink)}
+.quiz .ans .ok{color:var(--good)}
+.quiz .ans .no{color:var(--coral-ink)}
+.quiz li.done .choices{display:none}
+@media (max-width:640px){.quiz li{grid-template-columns:32px minmax(0,1fr)}.quiz .choices{grid-column:2}}
+
+/* Dig deeper accordions */
+.deeper{margin-top:clamp(48px,6vw,72px)}
+.deeper > h3{font-size:var(--step-2);display:flex;align-items:center;gap:12px}
+.deeper > h3::after{content:"";flex:1;height:1px;background:var(--blush-line)}
+.deeper > p{color:var(--slate);margin-top:6px}
+.acc{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.acc-item{border:1.5px solid var(--mist);border-radius:10px;overflow:hidden;background:var(--paper)}
+.acc-item.open{border-color:var(--navy)}
+.acc-btn{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:18px 22px;cursor:pointer}
+.acc-btn:focus-visible{outline:3px solid var(--coral);outline-offset:-3px}
+.acc-btn:hover{background:#F6F7FC}
+.acc-t{font-family:var(--serif);font-weight:600;font-size:1.2rem;color:var(--navy);display:block}
+.acc-s{display:block;font-size:.95rem;color:var(--slate);margin-top:2px}
+.acc-cta{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600;color:var(--navy);white-space:nowrap}
+.acc-cta i{width:28px;height:28px;border-radius:50%;background:var(--navy);position:relative;flex:none;transition:transform .2s, background-color .2s}
+.acc-cta i::before,.acc-cta i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;background:var(--paper);transform:translate(-50%,-50%)}
+.acc-cta i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.acc-item.open .acc-cta i{transform:rotate(45deg);background:var(--coral)}
+.acc-panel{padding:4px 22px 26px}
+.acc-panel .grid2{margin-top:6px}
+.acc-panel .grid3{margin-top:10px}
+@media (max-width:520px){.acc-cta span{display:none}}
+
+/* Mini sequence inside panels */
+.seq{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:q}
+.seq li{counter-increment:q;display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;padding-block:14px;border-bottom:1px solid var(--blush-line)}
+.seq li::before{content:counter(q);width:32px;height:32px;border-radius:50%;background:var(--blush);color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:.95rem}
+.seq h4{font-size:1.1rem;margin-bottom:4px}
+.seq p{color:var(--slate)}
+.loop{margin-top:16px;padding:18px 20px;background:var(--navy);color:var(--paper);border-radius:8px}
+.loop b{color:var(--coral);font-weight:700;display:block;margin-bottom:4px}
+.loop p{color:var(--mist)}
+
+/* Presenters */
+.about-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px);margin-top:36px}
+.person{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;align-items:start;padding:22px;background:var(--blush);border-radius:12px}
+.person img{width:150px;height:185px;object-fit:cover;border-radius:8px;display:block}
+.person h3{font-size:1.55rem}
+.person .role{color:var(--slate);font-size:.95rem;margin-top:4px}
+.person .bio{margin-top:14px;color:var(--ink);font-size:.98rem;line-height:1.6}
+.li-btn{margin-top:14px;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:8px;background:var(--navy);color:var(--paper);text-decoration:none;font-weight:600;font-size:.9rem}
+.li-btn:hover{background:var(--navy-deep)}
+.li-btn svg{width:16px;height:16px;fill:currentColor}
+@media (max-width:860px){.people{grid-template-columns:1fr}}
+@media (max-width:460px){.person{grid-template-columns:1fr}.person img{width:100%;height:auto;aspect-ratio:1;object-position:center 20%}}
+
+.purpose{margin-top:clamp(40px,6vw,64px);display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:clamp(24px,4vw,48px);align-items:center;border-top:2px solid var(--navy);padding-top:32px}
+.purpose .big{font-family:var(--serif);font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem);line-height:1.3;color:var(--navy);max-width:34ch}
+.purpose .sub{margin-top:14px;color:var(--slate);max-width:60ch}
+.purpose img{width:180px;height:180px}
+.purpose .ice{margin-top:22px;padding:16px 20px;background:var(--blush);border-radius:8px}
+.purpose .ice p:first-child{font-size:.9rem;color:var(--slate)}
+.purpose .ice p.qq{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--ink);margin-top:4px}
+@media (max-width:700px){.purpose{grid-template-columns:1fr}.purpose img{width:120px;height:120px;order:-1}}
+
+/* Wrap-up */
+.three{background:var(--blush)}
+.three ol{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.three li{min-width:0;border-top:4px solid var(--navy);padding-top:18px}
+.three li h3{font-size:var(--step-3);color:var(--navy)}
+.three li p{margin-top:10px;color:var(--ink)}
+@media (max-width:760px){.three ol{grid-template-columns:1fr}}
+
+.footer{background:var(--navy);color:var(--paper)}
+.footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center;padding-block:clamp(56px,8vw,88px)}
+.footer h2{color:var(--paper);font-size:var(--step-4)}
+.footer p{color:var(--mist);margin-top:12px;max-width:52ch}
+.footer img{width:170px;height:170px}
+.mails{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.mail{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(199,204,232,.3);border-radius:8px;padding:6px 6px 6px 14px}
+.mail span{font-weight:600;user-select:all;color:var(--paper)}
+.mail small{display:block;font-size:.8rem;color:var(--mist);font-weight:400}
+.copy{font:600 .82rem/1 var(--sans);border:0;border-radius:6px;padding:8px 10px;background:var(--coral);color:var(--ink);cursor:pointer;min-width:62px}
+.li-foot{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(199,204,232,.3);border-radius:8px;padding:12px 18px;text-decoration:none;color:var(--paper);font-weight:600}
+.li-foot:hover{border-color:var(--coral);background:rgba(255,255,255,.12)}
+.li-foot svg{width:22px;height:22px;fill:var(--coral);flex:none}
+.li-foot small{display:block;font-size:.8rem;color:var(--mist);font-weight:400}
+.fine{border-top:1px solid rgba(199,204,232,.2);padding-block:18px;font-size:.88rem;color:var(--mist)}
+@media (max-width:640px){.footer .wrap{grid-template-columns:1fr}.footer img{width:110px;height:110px;order:-1}}
+</style>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Workshop sections">
+  <div class="wrap">
+    <a class="brand" href="#top">AI, Decoded</a>
+    <ul>
+      <li><a class="link" href="#about">About us</a></li>
+      <li><a class="link" href="#what"><span class="n">1</span>What AI Is &amp; Isn't</a></li>
+      <li><a class="link" href="#safely"><span class="n">2</span>Using AI Safely &amp; Effectively</a></li>
+      <li><a class="link" href="#wrong"><span class="n">3</span>Where It Can Go Wrong</a></li>
+      <li><a class="link" href="#everyday"><span class="n">4</span>AI in Everyday Life</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="kicker">An information literacy workshop at Kenmore Library</p>
+      <h1>AI, Decoded</h1>
+      <p class="tag">What it actually is, what it isn't, and how to use it without getting fooled.</p>
+      <div class="by">
+        <strong>Presented by Saanvi Datta &amp; Jatin Kumar</strong>
+        <span>You don't need any tech background.</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-coral" href="#what">Start with the basics</a>
+        <a class="btn btn-ghost" href="#about">Meet the presenters</a>
+      </div>
+    </div>
+    <div class="frame"><img src="img/hero-head.webp" alt="Illustration of a human head in profile, half circuitry, with a set of balance scales inside" width="400" height="400"></div>
+  </div>
+  <div class="roadmap">
+    <div class="wrap">
+      <ol>
+        <li><a href="#what"><span class="ic"><img src="img/brain.png" alt=""></span><span class="rn">Part 1</span><span class="rt">What AI Actually Is</span><span class="rd">The plain-language version, no jargon required</span></a></li>
+        <li><a href="#safely"><span class="ic"><img src="img/compass.png" alt=""></span><span class="rn">Part 2</span><span class="rt">Using It Safely &amp; Well</span><span class="rd">Habits that'll actually stick after today</span></a></li>
+        <li><a href="#wrong"><span class="ic"><img src="img/triangle.png" alt=""></span><span class="rn">Part 3</span><span class="rt">Where It Can Go Wrong</span><span class="rd">We're not going to sugarcoat this part</span></a></li>
+        <li><a href="#everyday"><span class="ic"><img src="img/briefcase.png" alt=""></span><span class="rn">Part 4</span><span class="rt">What It Means for You</span><span class="rd">Work, home, and everyday life</span></a></li>
+      </ol>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="block" data-nav>
+  <div class="wrap">
+    <div class="about-head">
+      <div>
+        <h2 class="h2">Meet your presenters</h2>
+        <p class="lede">Two University of Washington sophomores, and the co-leads of this workshop at Kenmore Library.</p>
+      </div>
+    </div>
+
+    <div class="people">
+      <article class="person">
+        <img src="img/saanvi.webp" alt="Saanvi Datta" width="150" height="185">
+        <div>
+          <h3>Saanvi Datta</h3>
+          <p class="role">Data Science &amp; Business Administration Sophomore, University of Washington</p>
+          <p class="bio">Hi! I'm Saanvi, a sophomore at the University of Washington studying Data Science &amp; Business Administration. I'm passionate about AI and how it's already woven into everyday life, from the apps on our phones to the way we search, learn, and work. I plan to go into management, where understanding these tools, and their limits, will matter more and more. I want to help people feel confident using AI, not confused by it.</p>
+          <a class="li-btn" href="https://www.linkedin.com/in/saanvidatta" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11.5H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.85h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4z"/></svg>Saanvi on LinkedIn</a>
+        </div>
+      </article>
+      <article class="person">
+        <img src="img/jatin.webp" alt="Jatin Kumar" width="150" height="185">
+        <div>
+          <h3>Jatin Kumar</h3>
+          <p class="role">Electrical Engineering Sophomore, University of Washington Bothell</p>
+          <p class="bio">Hi, I'm Jatin! I'm an Electrical Engineering sophomore at UW Bothell with a background in local youth tutoring and community mentoring. I'm excited to share an objective, beginner-friendly look at artificial intelligence today to help you understand what AI really is, recognize its limitations, and navigate these modern tools with confidence.</p>
+          <a class="li-btn" href="https://www.linkedin.com/in/jatinkumar10/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11.5H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.85h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4z"/></svg>Jatin on LinkedIn</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="purpose">
+      <div>
+        <h3 class="h3" style="font-size:var(--step-2);color:var(--slate);font-weight:600;margin-bottom:10px">Why we're here</h3>
+        <p class="big">We're students, not engineers. We use AI daily and want to share what we've learned, the good parts and the messy parts.</p>
+        <p class="sub">The goal isn't to become an expert today. It's to leave a little more confident than you walked in.</p>
+        <div class="ice">
+          <p>The workshop opens with one question for the person next to you:</p>
+          <p class="qq">“What's an AI tool you've used or heard of, and what's one thing about it you've always wondered?”</p>
+        </div>
+      </div>
+      <img src="img/duo.webp" alt="Two friendly cartoon figures, one navy and one coral, chatting with speech bubbles" width="180" height="180">
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 1 ================= -->
+<section id="what" data-nav>
+  <div class="part">
+    <div class="wrap">
+      <span class="num" aria-hidden="true">01</span>
+      <div>
+        <h2>What AI Is, and Isn't</h2>
+        <p>AI stands for artificial intelligence. Let's start on the same page before we go anywhere else.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <h3 class="h3">So what is AI, really?</h3>
+          <div class="stack prose" style="margin-top:18px">
+            <p>Tools like ChatGPT or Gemini are called large language models. That means they've read a huge amount of text. They're very good at predicting the next likely word.</p>
+            <p>There's no understanding behind the reply. No memory of who you are. No inner life. Just very good pattern-matching, dressed up in confident-sounding sentences.</p>
+          </div>
+          <div class="illo">
+            <img src="img/reader.webp" alt="" width="96" height="96">
+            <p>It can sound thoughtful without being right. Fluency and accuracy are two very different things.</p>
+          </div>
+        </div>
+        <figure class="quote-card" style="margin:0">
+          <p style="color:var(--coral);font-weight:600;font-size:.95rem;margin-bottom:14px">In one line</p>
+          <blockquote class="q" style="margin:0">“A very well-read autocomplete, not a mind.”</blockquote>
+          <figcaption class="qsmall">We say this a lot. It's the single most useful way to remember how these tools behave.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Four things people get wrong</h3>
+      <div class="myths">
+        <div class="myth"><p class="said">“It's sentient.”</p><p>It has no beliefs, feelings, or self-awareness. Just probability, applied at a massive scale.</p></div>
+        <div class="myth"><p class="said">“If it sounds confident, it's right.”</p><p>Tone carries zero information about accuracy. Confident and wrong happen together more often than you'd think.</p></div>
+        <div class="myth"><p class="said">“It's neutral.”</p><p>It reflects whatever patterns, and biases, were in its training text. That's not the same as objective truth.</p></div>
+        <div class="myth"><p class="said">“It remembers me.”</p><p>Most tools don't actually carry a relationship with you between chats, unless you've told them to.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Some names you'll hear</h3>
+      <div class="tools" role="table" aria-label="Common AI tools">
+        <div class="row head" role="row"><span role="columnheader">Tool</span><span role="columnheader">Made by</span><span role="columnheader">What it's like</span></div>
+        <div class="row" role="row"><span class="name" role="cell">ChatGPT &amp; Copilot</span><span class="by" role="cell">OpenAI and Microsoft</span><span role="cell">General-purpose chat assistants, good all-around for writing and questions.</span></div>
+        <div class="row" role="row"><span class="name" role="cell">Gemini</span><span class="by" role="cell">Google</span><span role="cell">Built into Search and Workspace, handy if you already use Gmail or Docs.</span></div>
+        <div class="row" role="row"><span class="name" role="cell">Claude</span><span class="by" role="cell">Anthropic</span><span role="cell">Another general-purpose assistant, strong with longer documents.</span></div>
+        <div class="row" role="row"><span class="name" role="cell">Midjourney &amp; DALL-E</span><span class="by" role="cell">Image generators</span><span role="cell">Type a description, get a picture. Useful, and easy to misuse.</span></div>
+      </div>
+
+      <div class="deeper">
+        <h3>Dig deeper: how it works inside</h3>
+        <p>Three short explainers on what's going on under the hood.</p>
+        <div class="acc">
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-vectors" id="b-vectors"><span><span class="acc-t">How AI sees words: vectors</span><span class="acc-s">Words become points in space</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-vectors" role="region" aria-labelledby="b-vectors" hidden>
+              <div class="grid2">
+                <div><h3>Words become points</h3><p>Each word is stored as a vector: a point in multidimensional space. Example: key words like queen, power, and female help it predict more words.</p></div>
+                <div><h3>More dimensions, more power</h3><p>Graphing those points in different spaces helps it calculate more outcomes. More dimensions make it more powerful.</p></div>
+                <div><h3>Culture shapes meaning</h3><p>Because of a nation's culture and history, a word could sit next to something different, instead of just following English.</p></div>
+                <div><h3>Odd sentences throw it off</h3><p>An unusual sentence carries a word and its subject to a different graph or dimension, which can completely throw off the LLM.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-qkv" id="b-qkv"><span><span class="acc-t">Query, key, value</span><span class="acc-s">How every word decides what to pay attention to</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-qkv" role="region" aria-labelledby="b-qkv" hidden>
+              <p class="muted">Inside the model, every word uses these three to decide what to pay attention to.</p>
+              <div class="grid3">
+                <div><h3>Query</h3><p>Each word asks a question about the words around it. In “the tall tower,” <em>tower</em> asks: which words describe me?</p></div>
+                <div><h3>Keys</h3><p>Determine the matches, and how much influence each one exerts based on how close the match is.</p></div>
+                <div><h3>Values</h3><p>Carry the content that gets passed on: the push that moves a word in a new direction in vector space.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-train" id="b-train"><span><span class="acc-t">How it learns: training</span><span class="acc-s">From random numbers to good predictions</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-train" role="region" aria-labelledby="b-train" hidden>
+              <ol class="seq">
+                <li><div><h4>Start with random numbers</h4><p>Every embedding begins as totally random numbers.</p></div></li>
+                <li><div><h4>Hide the last word</h4><p>Take a bit of training data: a sentence or paragraph that's missing its last word.</p></div></li>
+                <li><div><h4>Make a prediction</h4><p>Run the transforming procedure, turning the second-to-last word into a guess for the next one.</p></div></li>
+              </ol>
+              <div class="loop"><b>Then repeat</b><p>Check how far off the prediction was, then do the same thing with billions of other pieces. It keeps transforming words until the predicted word is the right one.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 2 ================= -->
+<section id="safely" data-nav>
+  <div class="part">
+    <div class="wrap">
+      <span class="num" aria-hidden="true">02</span>
+      <div>
+        <h2>Using AI Safely &amp; Effectively</h2>
+        <p>How to get real value out of it, without getting burned.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">What using it actually looks like</h3>
+      <ol class="steps">
+        <li><h3>A new chat, plainly asked</h3><p>Most tools, like ChatGPT, Gemini, or Claude, work the same way: a chat window where you write like you're talking to a person. No special commands needed.</p></li>
+        <li><h3>A confident-sounding answer</h3><p>It replies right away, in full sentences, whether or not it's actually sure.</p></li>
+        <li><h3>A critical read</h3><p>The useful habit is asking whether the answer actually makes sense, not accepting it just because it sounds sure of itself.</p></li>
+        <li><h3>Back-and-forth, when needed</h3><p>If an answer is unclear or wrong, that back-and-forth is normal. It's part of how these tools are meant to be used.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Where it's actually useful</h3>
+      <div class="grid4">
+        <div><h3>Recipe helper</h3><p>Tell it what's in your fridge and any food restrictions, it'll get creative. Works for allergies too.</p></div>
+        <div><h3>Movie recommendations</h3><p>Describe a plot, mood, or vibe you're after, and it'll suggest a few matching titles to watch.</p></div>
+        <div><h3>Troubleshooting</h3><p>Snap a photo of an error message or a strange part, and it'll point you toward what's going on.</p></div>
+        <div><h3>Finding patterns</h3><p>Feed it a few documents and ask where they agree or disagree.</p></div>
+      </div>
+      <div class="note"><p><strong>One more:</strong> paste in a page full of ads and ask for a clean summary. It'll skip the clutter and just give you the content.</p></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">How much should you trust this?</h3>
+      <p class="lede">Not every answer deserves the same amount of double-checking.</p>
+      <div class="trust">
+        <div class="scale-bar" role="presentation"></div>
+        <div class="scale-ends"><span>Higher trust</span><span>Lower trust</span></div>
+        <div class="trust-cols">
+          <div>
+            <p class="d">Stable, settled facts: dates, definitions, things with one clear answer.</p>
+            <ul><li>“What's the capital of the United States?”</li><li>“Explain how photosynthesis works.”</li></ul>
+          </div>
+          <div>
+            <p class="d">Anything recent, contested, or personal: medical, legal, financial, or where real experts disagree.</p>
+            <ul><li>“What's in the news today?”</li><li>“Is this safe with my medication?”</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">A few ground rules</h3>
+      <div class="grid2">
+        <div><h3>Assume it's stored</h3><p>What you type may be saved, reviewed, or used to train future versions.</p></div>
+        <div><h3>Protect other people too</h3><p>Never paste in someone else's private information, not just your own. You never know what is being used as training data.</p></div>
+        <div><h3>Watch the confident tone</h3><p>A friendly, certain voice isn't evidence. It's a design choice. It's built to make you feel good.</p></div>
+        <div><h3>Verify before you act</h3><p>For anything that matters, check it against a real, independent source. AI may be human backed, but it's not an actual human.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <div class="split" style="align-items:center">
+        <div>
+          <h3 class="h3">Spot it: AI or not?</h3>
+          <p class="lede">Read both passages. One was written by AI. Which one?</p>
+        </div>
+        <img src="img/robot.webp" alt="" width="120" height="120" style="width:120px;height:120px;justify-self:end">
+      </div>
+      <div class="passages" id="aiornot">
+        <div class="passage" data-ai="true">
+          <span class="pl">Passage A</span>
+          <blockquote>Climate change is not some distant threat—it is the defining crisis of my generation, and I feel it every time I read the news. I have watched wildfires and floods grow more frequent, and I know that the choices we make now will shape the world I grow old in. What frightens me most is the gap between what science demands and what our leaders actually do. I believe every one of us has a responsibility to push for change, whether through voting, activism, or simply refusing to stay silent. This is my generation's fight, and I refuse to look away.</blockquote>
+          <span class="stamp">Written by AI</span>
+          <button class="btn btn-outline pick" type="button">Passage A is AI</button>
+        </div>
+        <div class="passage" data-ai="false">
+          <span class="pl">Passage B</span>
+          <blockquote>Climate change refers to long-term shifts in temperatures and weather patterns. Such shifts can be natural, due to changes in the sun's activity or large volcanic eruptions. But since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels like coal, oil and gas. Burning fossil fuels generates greenhouse gas emissions that act like a blanket wrapped around the Earth, trapping the sun's heat and raising temperatures.</blockquote>
+          <span class="stamp">Not AI</span>
+          <button class="btn btn-outline pick" type="button">Passage B is AI</button>
+        </div>
+      </div>
+      <p class="result" id="aiornot-result" aria-live="polite"></p>
+
+      <div class="deeper">
+        <h3>Dig deeper: getting better at it</h3>
+        <p>Practical habits and the activities from the workshop.</p>
+        <div class="acc">
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-calm" id="b-calm"><span><span class="acc-t">AI confidence can be good</span><span class="acc-s">A calm first stop when you're stressed</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-calm" role="region" aria-labelledby="b-calm" hidden>
+              <div class="stack prose">
+                <p>A flat tire, a strange noise, a form you don't understand. AI can be a calm first stop when you're stressed and not sure what to do next.</p>
+                <p>Ask it a question, or show it a photo. It won't panic, and it can help you think through next steps. It won't always be right, but it can help you feel less stuck while you figure out the real answer.</p>
+              </div>
+              <div class="note"><p><strong>For example:</strong> showing it a photo, or describing the problem, and asking “what should I check first?” gives a starting point, not the final word. It's a way to feel less stuck, while still verifying anything that matters.</p></div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-coach" id="b-coach"><span><span class="acc-t">The maker vs. the coach</span><span class="acc-s">Two roles, whether it's you or AI</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-coach" role="region" aria-labelledby="b-coach" hidden>
+              <p class="muted">Watch out: the lines can blur, and you might switch roles mid-task.</p>
+              <div class="grid3">
+                <div><h3>The maker</h3><p>Does the thing. The one who actually produces the work.</p></div>
+                <div><h3>The coach</h3><p>Teaches and gives feedback. A human coach already shares your context: culture, experience, your goals.</p></div>
+                <div><h3>Coach the coach</h3><p>AI starts from nothing. Tell it the audience, the goal, and the kind of feedback you want, more explicitly than you'd brief a friend.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-fake" id="b-fake"><span><span class="acc-t">Can you spot the fake?</span><span class="acc-s">Tells that still hold up for text, images, and video</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-fake" role="region" aria-labelledby="b-fake" hidden>
+              <p class="muted">Text, images, and video are all getting harder to tell apart from the real thing. A few tells still hold up:</p>
+              <div class="grid2">
+                <div><h3>That “too smooth” feeling</h3><p>Generic phrasing, oddly perfect grammar, or a lack of specific, personal detail.</p></div>
+                <div><h3>Look closely at the image</h3><p>Odd hands, mismatched shadows, garbled background text, too-perfect skin, extra fingers.</p></div>
+                <div><h3>Trace it back</h3><p>Reverse image search, or search a distinctive phrase in quotes to find the source.</p></div>
+                <div><h3>Check who's saying it</h3><p>Who posted it, and do they have a track record? A confident caption isn't proof. Look for sources, and actually click that link.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-prompt" id="b-prompt"><span><span class="acc-t">Prompt engineering: same question, different words</span><span class="acc-s">A live look at how wording changes the answer</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-prompt" role="region" aria-labelledby="b-prompt" hidden>
+              <p class="muted prose">This is called prompt engineering: choosing your words to get a better answer. We run the same AI tool and the same topic through two different prompts, live, so you can see how much the wording changes the answer.</p>
+              <ol class="seq">
+                <li><div><h4>Same question, plainly asked</h4><p>We type a simple version on screen, e.g. “what laptop should I buy?”</p></div></li>
+                <li><div><h4>Same question, reworded</h4><p>We rewrite it with more detail, tone, and context, same AI, same topic, and run it again.</p></div></li>
+                <li><div><h4>Compare notes</h4><p>We look at both answers together. Which one felt more useful, and why?</p></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 3 ================= -->
+<section id="wrong" data-nav>
+  <div class="part">
+    <div class="wrap">
+      <span class="num" aria-hidden="true">03</span>
+      <div>
+        <h2>Where It Can Go Wrong</h2>
+        <p>An honest look, and what actually helps.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Four categories of risk</h3>
+      <div class="grid2">
+        <div><h3>Output risks</h3><p>When AI just gets it wrong. It makes things up and invents facts, confidently, with no signal it's guessing. Links may not exist, citations may be fake, and sources may say the opposite.</p></div>
+        <div><h3>Psychological risks</h3><p>What it does to your mind over time.</p></div>
+        <div><h3>Integrity risks</h3><p>Passing off AI work as your own.</p></div>
+        <div><h3>Societal risks</h3><p>What it means for everyone: bias, jobs, ownership, and energy.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Yes, it makes things up</h3>
+      <p class="lede">This is called “hallucination.” It sounds just as confident either way, and there's no built-in signal that it's guessing.</p>
+      <div class="grid3">
+        <div><h3>Fake citations</h3><p>A real-sounding author, journal, and page number, for a study that doesn't exist.</p></div>
+        <div><h3>Invented facts</h3><p>Names, dates, and numbers stated as fact, with nothing behind them.</p></div>
+        <div><h3>Broken or fake links</h3><p>A link that goes nowhere, or to a page saying something else entirely.</p></div>
+      </div>
+      <div class="note"><p>The real skill isn't spotting what's good. It's knowing when, and how, to check.</p></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Confidence isn't proof</h3>
+      <p class="lede">AI sounds exactly as sure when it's wrong as when it's right. Can you tell these two apart?</p>
+      <div class="pair" id="pair">
+        <div class="claim right"><p class="c">“The treaty was signed in 1848.”</p><p class="v">Correct, stated with total confidence.</p></div>
+        <div class="claim wrong"><p class="c">“The treaty was signed in 1852.”</p><p class="v">Wrong, stated with the exact same confidence.</p></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:20px">
+        <button class="btn btn-outline" type="button" id="pair-btn" aria-controls="pair" aria-pressed="false">Show which one is right</button>
+      </div>
+      <div class="note"><p><strong>Takeaway:</strong> use what the topic is, not how it sounds, to decide how hard to verify.</p></div>
+
+      <div class="deeper">
+        <h3>Dig deeper: the bigger costs</h3>
+        <p>What overuse does to you, and what AI means for everyone else.</p>
+        <div class="acc">
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-overuse" id="b-overuse"><span><span class="acc-t">What overuse can cost you</span><span class="acc-s">Losing skills, weaker judgment, academic integrity</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-overuse" role="region" aria-labelledby="b-overuse" hidden>
+              <div class="grid3">
+                <div><h3>Losing skills</h3><p>Overuse can make you forget how to do things, and it's hard to get those skills back.</p></div>
+                <div><h3>Weaker judgment</h3><p>Someone with no independent judgment isn't just worse at thinking. They're easier to steer.</p></div>
+                <div><h3>Academic integrity</h3><p>Turning in AI-generated work as your own: an essay, a problem set, code.</p></div>
+              </div>
+              <div class="loop"><b>Who wants to steer you</b><p>Advertisers, politicians, scammers, and the AI and platform companies themselves. They want your money, your vote, your attention, your data, and your subscription.</p></div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-atrophy" id="b-atrophy"><span><span class="acc-t">Skill atrophy: why not everything</span><span class="acc-s">The skills that fade when you hand them off</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-atrophy" role="region" aria-labelledby="b-atrophy" hidden>
+              <div class="grid2">
+                <div><h3>Writing</h3><p>If AI drafts everything for you, your own voice and ability to write under pressure can fade.</p></div>
+                <div><h3>Navigation &amp; memory</h3><p>Leaning on GPS or reminders for everything can dull your sense of direction and recall.</p></div>
+                <div><h3>Math &amp; estimating</h3><p>Always reaching for a calculator or an AI answer means you lose the habit of a rough mental check.</p></div>
+                <div><h3>Judgment calls</h3><p>Letting AI decide for you, again and again, is practice you're not getting.</p></div>
+              </div>
+              <div class="note"><p>The fix isn't avoiding AI. It's noticing when you lean on it out of habit, not need.</p></div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-bigger" id="b-bigger"><span><span class="acc-t">Questions worth sitting with</span><span class="acc-s">Ownership, jobs, bias, and dependence</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-bigger" role="region" aria-labelledby="b-bigger" hidden>
+              <div class="grid2">
+                <div><h3>Who owns the work?</h3><p>Models train on other people's writing and art, raising real questions about credit and consent.</p></div>
+                <div><h3>Jobs and skills</h3><p>Tasks inside jobs are changing fast, even where whole jobs aren't disappearing.</p></div>
+                <div><h3>Bias at scale</h3><p>Whatever bias exists in the training data can get repeated, to millions of people at once.</p></div>
+                <div><h3>Leaning on it too much</h3><p>Skills like writing and judgment can quietly erode if we outsource them by default.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-physical" id="b-physical"><span><span class="acc-t">It has a physical cost, too</span><span class="acc-s">Electricity, water, and hardware</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-physical" role="region" aria-labelledby="b-physical" hidden>
+              <p class="muted prose">Training a model happens once. Answering everyone's questions, every day, forever, doesn't. That part grows with use.</p>
+              <div class="grid3">
+                <div><h3>Electricity</h3><p>Every question you ask uses power. Data centers run around the clock to keep up.</p></div>
+                <div><h3>Water</h3><p>Those same data centers need water to stay cool, especially in hot climates.</p></div>
+                <div><h3>Hardware</h3><p>The chips inside carry their own manufacturing footprint, before they even run a single query.</p></div>
+              </div>
+              <p class="muted" style="margin-top:18px;font-size:.92rem">Exact figures vary by model and provider.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 4 ================= -->
+<section id="everyday" data-nav>
+  <div class="part">
+    <div class="wrap">
+      <span class="num" aria-hidden="true">04</span>
+      <div>
+        <h2>AI at Work &amp; in Everyday Life</h2>
+        <p>What's actually changing, and how to stay adaptable through it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Jobs aren't vanishing, but tasks are shifting</h3>
+      <p class="lede">That's the honest, unglamorous version of what's happening inside most workplaces right now.</p>
+      <div class="grid3">
+        <div><h3>What's shifting</h3><p>Repetitive drafting, summarizing, and first-pass research, increasingly AI-assisted.</p></div>
+        <div><h3>What's holding steady</h3><p>Trust, relationships, judgment calls, and hands-on skill. Still hard for AI to fake.</p></div>
+        <div><h3>What matters now</h3><p>Knowing how to work with AI, and when not to, is becoming its own skill.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Chances are, you've already used it</h3>
+      <div class="grid4">
+        <div><h3>Accessibility</h3><p>Reading text aloud, describing images, and simplifying dense language.</p></div>
+        <div><h3>Staying connected</h3><p>Drafting messages, translating, and bridging generational or language gaps.</p></div>
+        <div><h3>Learning &amp; homework</h3><p>Explaining a concept a different way when the textbook version isn't clicking.</p></div>
+        <div><h3>Right here at the library</h3><p>Search help, form navigation: the everyday questions you already bring to the desk.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">Myth or fact?</h3>
+      <p class="lede">Pick an answer for each statement to see why.</p>
+      <ol class="quiz" id="quiz">
+        <li data-answer="myth"><span class="qn">1</span><span class="qs">AI understands what I'm asking it.</span><span class="choices"><button type="button" data-pick="myth">Myth</button><button type="button" data-pick="fact">Fact</button></span><p class="ans" hidden><b>Myth.</b> AI does not truly understand your words. It just guesses the next best word based on math and patterns from its training data. It has no real mind, feelings, or true grasp of meaning.</p></li>
+        <li data-answer="fact"><span class="qn">2</span><span class="qs">AI can sound completely certain and still be wrong.</span><span class="choices"><button type="button" data-pick="myth">Myth</button><button type="button" data-pick="fact">Fact</button></span><p class="ans" hidden><b>Fact.</b> AI models often generate wrong information with a very confident and polite tone. This is called a hallucination.</p></li>
+        <li data-answer="myth"><span class="qn">3</span><span class="qs">Everything an AI tells you has already been fact-checked.</span><span class="choices"><button type="button" data-pick="myth">Myth</button><button type="button" data-pick="fact">Fact</button></span><p class="ans" hidden><b>Myth.</b> AI models generate text based on patterns in data, not by verifying every single fact against a live source.</p></li>
+        <li data-answer="myth"><span class="qn">4</span><span class="qs">AI remembers you the same way a person would.</span><span class="choices"><button type="button" data-pick="myth">Myth</button><button type="button" data-pick="fact">Fact</button></span><p class="ans" hidden><b>Myth.</b> A person remembers life through feelings, time, and a living brain. An AI only stores data in numbers and text files. It does not feel or live through past events.</p></li>
+        <li data-answer="fact"><span class="qn">5</span><span class="qs">AI can help you draft, brainstorm, or summarize, as a starting point.</span><span class="choices"><button type="button" data-pick="myth">Myth</button><button type="button" data-pick="fact">Fact</button></span><p class="ans" hidden><b>Fact.</b> Used as a starting point, it can help you draft, brainstorm, or summarize.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <h3 class="h3">You don't have to get this perfect</h3>
+      <div class="grid4">
+        <div><h3>Start small</h3><p>Low-stakes things, like a recipe or a packing list, are a gentler place to get a feel for it than a big decision.</p></div>
+        <div><h3>It's OK to say no</h3><p>You don't have to use AI for everything, or ever, if you don't want to.</p></div>
+        <div><h3>Mistakes are normal</h3><p>You will get a wrong answer sometimes. That's why we double-check, not a sign you're doing it wrong.</p></div>
+        <div><h3>You know more than you think</h3><p>Everything here, you can practice on your own time, at your own pace.</p></div>
+      </div>
+
+      <div class="deeper">
+        <h3>Dig deeper: the closing demo</h3>
+        <p>The closing activity from the workshop.</p>
+        <div class="acc">
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="d-book" id="b-book"><span><span class="acc-t">AI recommends a movie, live</span><span class="acc-s">Then we fact-check it together</span></span><span class="acc-cta"><span>Read more</span><i></i></span></button>
+            <div class="acc-panel" id="d-book" role="region" aria-labelledby="b-book" hidden>
+              <ol class="seq">
+                <li><div><h4>We ask, on screen</h4><p>We type “give me a movie recommendation about ___” into AI, live, so you can see exactly what we type and what comes back.</p></div></li>
+                <li><div><h4>We fact-check it, together</h4><p>Right there on screen: is that movie real? Does the description match what AI said about it?</p></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WRAP-UP ================= -->
+<section class="three block" aria-labelledby="three-h">
+  <div class="wrap">
+    <h2 class="h2" id="three-h">If you remember three things</h2>
+    <ol>
+      <li><h3>Match your trust to the topic</h3><p>Settled facts vs. recent, personal, or contested. Verify accordingly.</p></li>
+      <li><h3>Confidence isn't proof</h3><p>Tone tells you nothing about accuracy. Check the source, not the delivery.</p></li>
+      <li><h3>Protect what's yours</h3><p>Your data, your skills, your judgment. Use it as a tool, not a replacement.</p></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <h2>Questions? We'd love to hear them.</h2>
+      <p>The Kenmore Library is a great next stop if you want to keep exploring AI. You can also reach either of us on LinkedIn.</p>
+      <div class="mails">
+        <a class="li-foot" href="https://www.linkedin.com/in/saanvidatta" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11.5H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.85h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4z"/></svg><span><small>Connect with</small>Saanvi Datta</span></a>
+        <a class="li-foot" href="https://www.linkedin.com/in/jatinkumar10/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11.5H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.85h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4z"/></svg><span><small>Connect with</small>Jatin Kumar</span></a>
+      </div>
+    </div>
+    <img src="img/wave.webp" alt="" width="170" height="170">
+  </div>
+  <div class="fine"><div class="wrap" style="display:block;padding-block:0">AI, Decoded: an information literacy workshop by Saanvi Datta &amp; Jatin Kumar, Kenmore Library.</div></div>
+</footer>
+
+<script>
+(function(){
+  // Accordions
+  document.querySelectorAll('.acc-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+      btn.closest('.acc-item').classList.toggle('open', !open);
+      var cta = btn.querySelector('.acc-cta span');
+      if (cta) cta.textContent = open ? 'Read more' : 'Close';
+    });
+  });
+
+  // AI or not
+  var box = document.getElementById('aiornot'), res = document.getElementById('aiornot-result');
+  box.querySelectorAll('.pick').forEach(function(b){
+    b.addEventListener('click',function(){
+      var picked = b.closest('.passage');
+      var right = picked.dataset.ai==='true';
+      box.classList.add('revealed');
+      box.querySelectorAll('.passage').forEach(function(p){ p.classList.add(p.dataset.ai==='true'?'is-ai':'is-human'); });
+      res.innerHTML = right
+        ? '<strong>You got it.</strong> Passage A was written by AI. What gave it away?'
+        : '<strong>It fooled you.</strong> Passage A, the personal one, was written by AI. What made B seem less human?';
+    });
+  });
+
+  // Confidence pair
+  var pair = document.getElementById('pair'), pb = document.getElementById('pair-btn');
+  pb.addEventListener('click',function(){
+    var on = pair.classList.toggle('shown');
+    pb.setAttribute('aria-pressed', String(on));
+    pb.textContent = on ? 'Hide the answer' : 'Show which one is right';
+  });
+
+  // Myth or fact
+  document.querySelectorAll('#quiz li').forEach(function(li){
+    li.querySelectorAll('[data-pick]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var ok = b.dataset.pick===li.dataset.answer;
+        var ans = li.querySelector('.ans');
+        ans.insertAdjacentHTML('afterbegin','<span class="'+(ok?'ok':'no')+'">'+(ok?'Right. ':'Not quite. ')+'</span>');
+        ans.hidden = false; li.classList.add('done');
+      });
+    });
+  });
+
+  // Active nav
+  var links = {};
+  document.querySelectorAll('.nav a.link').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          Object.values(links).forEach(function(a){ a.removeAttribute('aria-current'); });
+          var a = links[e.target.id];
+          if(a){ a.setAttribute('aria-current','true'); var ul=a.closest('ul'); if(ul && ul.scrollWidth>ul.clientWidth){ ul.scrollLeft = a.offsetLeft - 16; } }
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('[data-nav]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+
+</body></html>
